@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Personalización del Header del Recibo - Enfoque más defensivo -->
+    <t t-name="gomez_pos_receipt_custom.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
+        <!-- Intentar encontrar el elemento de contacto con varios selectores -->
+        <xpath expr="//div[@class='pos-receipt-contact']" position="replace">
+            <div class="custom-header pos-receipt-contact">
+                <div class="company-info" style="text-align: center; font-family: 'Courier New', monospace; font-weight: bold; letter-spacing: 0.5px;">
+                    <div t-if="props.data.company.name" t-esc="props.data.company.name"/>
+                    <div t-if="props.data.company.street" t-esc="props.data.company.street"/>
+                    <div t-if="props.data.company.state_id and props.data.company.state_id[1]" t-esc="props.data.company.state_id[1]"/>
+                    <div t-if="props.data.company.zip" t-esc="props.data.company.zip"/>
+                    <div t-if="props.data.company.country_id and props.data.company.country_id[1]"
+                         t-esc="props.data.company.country_id[1]"/>
+                    <div t-if="props.data.company.phone">Tel: <t t-esc="props.data.company.phone"/></div>
+                    <div t-if="props.data.cashier"><t t-esc="props.data.cashier"/></div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Selector alternativo si el anterior no funciona -->
+        <xpath expr="//div[contains(@class, 'pos-receipt-contact')]" position="replace">
+            <div class="custom-header pos-receipt-contact">
+                <div class="company-info" style="text-align: center; font-family: 'Courier New', monospace; font-weight: bold; letter-spacing: 0.5px;">
+                    <div t-if="props.data.company.name" t-esc="props.data.company.name"/>
+                    <div t-if="props.data.company.street" t-esc="props.data.company.street"/>
+                    <div t-if="props.data.company.state_id and props.data.company.state_id[1]" t-esc="props.data.company.state_id[1]"/>
+                    <div t-if="props.data.company.zip" t-esc="props.data.company.zip"/>
+                    <div t-if="props.data.company.country_id and props.data.company.country_id[1]"
+                         t-esc="props.data.company.country_id[1]"/>
+                    <div t-if="props.data.company.phone">Tel: <t t-esc="props.data.company.phone"/></div>
+                    <div t-if="props.data.cashier"><t t-esc="props.data.cashier"/></div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Eliminar cualquier logo -->
+        <xpath expr="//img" position="replace"/>
+    </t>
+
+
+</templates>
