@@ -18,6 +18,7 @@
     'data': [],
     'assets': {
         'point_of_sale._assets_pos': [
+            'gomez_pos_receipt_custom/static/src/js/receipt_order.js',
             'gomez_pos_receipt_custom/static/src/xml/receipt_templates.xml',
         ],
     },
