@@ -19,12 +19,11 @@
                     <div t-if="props.data.company.vat">NIF: <t t-esc="props.data.company.vat"/></div>
                     <div t-if="props.data.company.street" t-esc="props.data.company.street"/>
                     <div t-if="props.data.company.zip" t-esc="props.data.company.zip"/>
-                    <div>
-                        <t t-if="props.data.company.city" t-esc="props.data.company.city"/>
-                        <t t-if="props.data.company.state_id">
-                            (<t t-esc="props.data.company.state_id.name || ''"/>)
-                        </t>
-                    </div>
+                    <span style="display: inline; white-space: nowrap;">
+                        <t t-esc="(props.data.company.city || '') + (props.data.company.state_id ? ' (' + (props.data.company.state_id.name || '') + ')' : '')"/>
+                    </span>
+
+
 
                 </t>
                 <t t-set="partner" t-value="props.data.partner"/>
@@ -33,10 +32,9 @@
                     <div t-if="partner.vat">NIF: <t t-esc="partner.vat"/></div>
                     <div t-if="partner.street" t-esc="partner.street"/>
                     <div t-if="partner.zip" t-esc="partner.zip"/>
-                    <div t-if="partner.city" t-esc="partner.city"/>
-                    <div t-if="partner.state_id">
-                        (<t t-esc="partner.state_id.name || ''"/>)
-                    </div>
+                    <span style="display: inline; white-space: nowrap;">
+                        <t t-esc="(partner.city || '') + (partner.state_id ? ' (' + (partner.state_id.name || '') + ')' : '')"/>
+                    </span>
                 </t>
             </div>
         </xpath>
