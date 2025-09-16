@@ -9,25 +9,45 @@
                     <t t-if="isSimplifiedInvoice">
                         <div>Factura simplificada</div>
                         <div class="simplified-invoice-number" t-esc="props.data.invoice_name"/>
+                        <div>
+                            <t t-set="now" t-value="new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })"/>
+                            Fecha:
+                            <t t-esc="now"/>
+                        </div>
                     </t>
                     <div t-if="props.data.company.name" t-esc="props.data.company.name"/>
+                    <div t-if="props.data.company.vat">NIF: <t t-esc="props.data.company.vat"/></div>
                     <div t-if="props.data.company.street" t-esc="props.data.company.street"/>
                     <div t-if="props.data.company.zip" t-esc="props.data.company.zip"/>
-                    <div t-if="props.data.company.city" t-esc="props.data.company.city"/>
-                    <div t-if="props.data.company.state_id">(<t t-esc="props.data.company.state_id[1]"/>)</div>
-                    <div t-if="props.data.company.vat">NIF: <t t-esc="props.data.company.vat"/></div>
+                    <div>
+                        <t t-if="props.data.company.city" t-esc="props.data.company.city"/>
+                        <t t-if="props.data.company.state_id">
+                            (<t t-esc="props.data.company.state_id.name || ''"/>)
+                        </t>
+                    </div>
+
                 </t>
                 <t t-set="partner" t-value="props.data.partner"/>
-                <t t-if="props.data.is_spanish and partner and partner.id !== props.data.simplified_partner_id">
+                <t t-if="props.data.is_spanish and partner and partner.id !== props.data.simplified_partner_id and partner.name">
                     <div>Cliente: <t t-esc="partner.name"/></div>
                     <div t-if="partner.vat">NIF: <t t-esc="partner.vat"/></div>
-                    <div t-if="partner.address" t-esc="partner.address"/>
+                    <div t-if="partner.street" t-esc="partner.street"/>
+                    <div t-if="partner.zip" t-esc="partner.zip"/>
+                    <div t-if="partner.city" t-esc="partner.city"/>
+                    <div t-if="partner.state_id">
+                        (<t t-esc="partner.state_id.name || ''"/>)
+                    </div>
                 </t>
             </div>
         </xpath>
     </t>
     <t t-name="gomez_pos_custom.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
-    <xpath expr="(//div[contains(@class, 'pos-receipt-order-data')])[6]" position="replace">
-</xpath>
-</t>
+    <xpath expr="//div[contains(@class, 'pos-receipt') and contains(@class, 'p-2')]" position="attributes">
+            <attribute name="style">font-family: 'Courier New', monospace; font-weight: bold; letter-spacing: 0.5px; text-align: center;</attribute>
+    </xpath>
+    <xpath
+        expr="(//div[contains(@class, 'pos-receipt-order-data')])[6]"
+        position="replace">
+    </xpath>
+    </t>
 </templates>
