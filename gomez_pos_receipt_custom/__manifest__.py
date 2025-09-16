@@ -14,7 +14,7 @@
         - Compatible con Odoo 18
     """,
     'author': 'Gomez',
-    'depends': ['point_of_sale'],
+    'depends': ['point_of_sale', 'l10n_es_pos'],
     'data': [],
     'assets': {
         'point_of_sale._assets_pos': [
